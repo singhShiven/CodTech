@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncSpace AI - Intelligent Collaborative Workspace</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-edit logo-icon"></i>
+                <h1>SyncSpace AI</h1>
+                <p>Intelligent Real-Time Collaborative Workspace</p>
+            </div>
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="username-input">Your Name</label>
+                    <input 
+                        type="text" 
+                        id="username-input" 
+                        placeholder="Enter your name"
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="room-input">Room ID</label>
+                    <input 
+                        type="text" 
+                        id="room-input" 
+                        placeholder="Enter room ID or create new"
+                        maxlength="50"
+                        autocomplete="off"
+                    >
+                    <small>Anyone with this ID can join your session</small>
+                </div>
+                <button id="join-btn" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Join Workspace
+                </button>
+                
+                <div class="demo-divider">
+                  <span>or</span>
+                </div>
+                
+                <button type="button" id="demo-mode-btn" class="demo-mode-btn">
+                  ⚡ Demo Mode
+                  <span class="demo-mode-subtitle">Instant preview — no setup needed</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor Screen -->
+    <div id="editor-screen" class="screen">
+        <!-- Header -->
+        <header class="editor-header">
+            <div class="header-left">
+                <i class="fas fa-edit header-logo"></i>
+                <div class="doc-title-container">
+                    <button id="home-btn" class="btn-icon" title="Go to Dashboard">
+                        <i class="fas fa-house"></i>
+                      </button> <input 
+                      id="doc-title-input" 
+                      class="doc-title-input" 
+                      value="Untitled Document"
+                    />
+                    <span id="save-status" class="save-status">Saved</span>
+                  </div>
+                <span class="room-badge" id="room-badge"></span>
+            </div>
+            <div class="header-center">
+                <div class="connection-status" id="connection-status">
+                    <i class="fas fa-circle"></i>
+                    <span>Connected</span>
+                </div>
+            </div>
+            <div class="header-right">
+               
+                <button id="theme-toggle" class="btn-icon" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- ENHANCEMENT: Logout / Back button -->
+                <button id="logout-btn" class="btn-icon btn-logout" title="Leave Workspace">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="editor-main">
+            <!-- Left Sidebar -->
+            <aside class="sidebar sidebar-left">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">COLLABORATORS</h3>
+                  
+                    <div id="users-list" class="users-list modern-users"></div>
+                  
+                    <button class="invite-btn">
+                      <i class="fas fa-user-plus"></i>
+                      Invite People
+                    </button>
+                   
+                  </div>
+                  
+                  <div class="sidebar-section">
+                    <h3 class="sidebar-title">RECENT ACTIVITY</h3>
+                  
+                    <div id="activity-log" class="activity-log modern-activity"></div>
+                  </div>
+            </aside>
+
+            <!-- Editor Area -->
+            <main class="editor-content">
+                <!-- AI Toolbar -->
+                <div class="ai-toolbar">
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn primary" id="ai-rewrite-btn">
+                            <i class="fas fa-magic"></i>
+                            <span>Rewrite</span>
+                        </button>
+                        <button class="toolbar-btn" id="ai-summarize-btn" title="Summarize Document">
+                            <i class="fas fa-compress"></i>
+                            <span>Summarize</span>
+                        </button>
+                        <button class="toolbar-btn" id="ai-bullets-btn" title="Convert to Bullet Points">
+                            <i class="fas fa-list-ul"></i>
+                            <span>Bullets</span>
+                        </button>
+                        <div class="toolbar-dropdown">
+                            <button class="toolbar-btn dropdown-toggle" id="tone-dropdown-btn">
+                                <i class="fas fa-adjust"></i>
+                                <span>Tone</span>
+                                <i class="fas fa-caret-down"></i>
+                            </button>
+                            <div class="dropdown-menu" id="tone-menu">
+                                <button class="dropdown-item" data-tone="formal">
+                                    <i class="fas fa-briefcase"></i>
+                                    Make Formal
+                                </button>
+                                <button class="dropdown-item" data-tone="technical">
+                                    <i class="fas fa-code"></i>
+                                    Make Technical
+                                </button>
+                            </div>
+                        </div>
+                        <button class="toolbar-btn" id="ai-action-items-btn" title="Extract Action Items">
+                            <i class="fas fa-tasks"></i>
+                            <span>Action Items</span>
+                        </button>
+                        <button class="toolbar-btn" id="ai-conclusion-btn" title="Generate Conclusion">
+                            <i class="fas fa-flag-checkered"></i>
+                            <span>Conclusion</span>
+                        </button>
+                    </div>
+                    <div class="toolbar-divider"></div>
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" id="analytics-btn" title="Document Analytics">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </button>
+                        <button class="toolbar-btn" id="versions-btn" title="Version History">
+                            <i class="fas fa-clock"></i>
+                            <span>Versions</span>
+                        </button>
+                        <button id="export-pdf-btn" class="toolbar-btn export-btn">
+                            <i class="fas fa-file-pdf"></i> Export
+                          </button>
+                    </div>
+                </div>
+                <div class="format-toolbar">
+                    <select class="format-select">
+                      <option>Paragraph</option>
+                      <option>Heading 1</option>
+                      <option>Heading 2</option>
+                    </select>
+                  
+                    <button data-command="bold"><i class="fas fa-bold"></i></button>
+<button data-command="italic"><i class="fas fa-italic"></i></button>
+<button data-command="underline"><i class="fas fa-underline"></i></button>
+
+<button data-command="insertUnorderedList"><i class="fas fa-list-ul"></i></button>
+<button data-command="insertOrderedList"><i class="fas fa-list-ol"></i></button>
+
+<button data-command="createLink"><i class="fas fa-link"></i></button>
+<button data-command="formatBlock" data-value="blockquote"><i class="fas fa-quote-right"></i></button>
+
+<button data-command="insertHTML" data-value="<code></code>"><i class="fas fa-code"></i></button>
+                  </div>
+                <!-- AI Suggestion Banner -->
+                <div id="ai-suggestion-banner" class="ai-suggestion-banner" style="display: none;">
+                    <div class="suggestion-content">
+                        <i class="fas fa-lightbulb"></i>
+                        <span id="suggestion-text"></span>
+                    </div>
+                    <div class="suggestion-actions">
+                        <button id="apply-suggestion-btn" class="btn-suggestion btn-success">
+                            <i class="fas fa-check"></i> Apply
+                        </button>
+                        <button id="ignore-suggestion-btn" class="btn-suggestion btn-secondary">
+                            <i class="fas fa-times"></i> Ignore
+                        </button>
+                    </div>
+                </div>
+<!-- Time Travel Slider -->
+
+                <!-- Editor -->
+                <div class="editor-container">
+                    <div class="editor-wrapper">
+                  
+                        <div 
+                        id="editor" 
+                        class="editor notion-editor" 
+                        contenteditable="true"
+                        spellcheck="true"
+                      >
+                        <p>Start typing...</p>
+                      </div>
+                  
+                      <div id="cursors-container" class="cursors-container"></div>
+                  
+                    </div>
+                  </div>
+                <!-- Editor Footer -->
+                <div class="editor-footer">
+                    <div class="footer-stats">
+                        <span id="word-count">0 words</span>
+                        <span class="separator">•</span>
+                        <span id="char-count">0 characters</span>
+                    </div>
+                    <div class="footer-info">
+                        <span id="typing-indicator"></span>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar (AI Chat - Hidden by default) -->
+            <aside class="sidebar sidebar-right" id="ai-chat-panel" style="display: none;">
+                <div class="chat-header">
+                    <h3><i class="fas fa-robot"></i> AI Assistant</h3>
+                    <button id="close-chat-btn" class="btn-icon-small">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-message chat-assistant">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>Hello! I'm your AI assistant. I can help you with:</p>
+                            <ul>
+                                <li>Answering questions about your document</li>
+                                <li>Providing writing suggestions</li>
+                                <li>Generating ideas and outlines</li>
+                                <li>Analyzing document content</li>
+                            </ul>
+                            <p>What would you like help with?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <textarea 
+                        id="chat-input" 
+                        class="chat-input"
+                        placeholder="Ask me anything about your document..."
+                        rows="2"
+                    ></textarea>
+                    <button id="send-chat-btn" class="btn-send-chat">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- AI Preview Modal -->
+    <div id="ai-preview-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">AI Result Preview</h3>
+                <button class="modal-close" id="close-modal-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-section">
+                    <label>Original Text:</label>
+                    <div class="preview-box preview-original" id="preview-original"></div>
+                </div>
+                <div class="preview-section">
+                    <label>AI Result:</label>
+                    <div class="preview-box preview-result" id="preview-result"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-ai-btn" class="btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button id="apply-ai-btn" class="btn-primary">
+                    <i class="fas fa-check"></i> Apply Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Modal -->
+    <div id="analytics-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-chart-line"></i> Document Analytics</h3>
+                <button class="modal-close" id="close-analytics-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="analytics-content" class="analytics-grid">
+                    <div class="analytics-card">
+                        <h4>Readability</h4>
+                        <div class="metric-value" id="readability-score">--</div>
+                        <div class="metric-label" id="readability-level">--</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Sentiment</h4>
+                        <div class="metric-value" id="sentiment-score">--</div>
+                        <div class="metric-label" id="sentiment-label">--</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Complexity</h4>
+                        <div class="metric-value" id="complexity-score">--</div>
+                        <div class="metric-label" id="complexity-level">--</div>
+                    </div>
+                    <div class="analytics-card">
+                        <h4>Passive Voice</h4>
+                        <div class="metric-value" id="passive-percentage">--</div>
+                        <div class="metric-label" id="passive-count">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version History Modal -->
+    <div id="versions-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-clock"></i> Version History</h3>
+                <button class="modal-close" id="close-versions-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="versions-list" class="versions-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loading-text">AI is thinking...</p>
+        </div>
+    </div>
+
+<!-- Demo Welcome Screen -->
+<div id="demo-welcome-screen" class="dws-overlay" style="display:none;" tabindex="0">
+
+  <!-- ENHANCEMENT: floating gradient orbs -->
+  <div class="dws-orb dws-orb-1"></div>
+  <div class="dws-orb dws-orb-2"></div>
+  <div class="dws-orb dws-orb-3"></div>
+
+  <!-- ENHANCEMENT: mouse glow tracker -->
+  <div class="dws-mouse-glow" id="dws-mouse-glow"></div>
+
+  <button class="dws-skip" id="dws-skip-btn">Skip</button>
+
+  <div class="dws-stage">
+
+    <div class="dws-slide" data-slide="0">
+      <div class="dws-lottie" id="lottie-0"></div>
+      <h1 class="dws-title">Welcome to SyncSpace AI</h1>
+      <p class="dws-sub">Real-time collaborative AI workspace</p>
+    </div>
+
+    <div class="dws-slide" data-slide="1">
+      <div class="dws-lottie" id="lottie-1"></div>
+      <h1 class="dws-title">Collaborate Live</h1>
+      <p class="dws-sub">Multiple users, live cursors</p>
+    </div>
+
+    <div class="dws-slide" data-slide="2">
+      <div class="dws-lottie" id="lottie-2"></div>
+      <h1 class="dws-title">AI Editing</h1>
+      <p class="dws-sub">Rewrite, summarize, tone adjust</p>
+    </div>
+
+    <div class="dws-slide" data-slide="3">
+      <div class="dws-lottie" id="lottie-3"></div>
+      <h1 class="dws-title">Version Control</h1>
+      <p class="dws-sub">Restore anytime</p>
+    </div>
+
+    <div class="dws-slide" data-slide="4">
+      <div class="dws-lottie" id="lottie-4"></div>
+      <h1 class="dws-title">Analytics</h1>
+      <p class="dws-sub">Insights & readability</p>
+    </div>
+
+    <div class="dws-slide" data-slide="5">
+      <div class="dws-lottie" id="lottie-5"></div>
+      <h1 class="dws-title">Ready?</h1>
+      <button id="dws-start-btn" class="dws-cta">Start Demo</button>
+    </div>
+
+  </div>
+
+  <div id="dws-dots" class="dws-dots"></div>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get('room');
+    
+    window.addEventListener("DOMContentLoaded", () => {
+      if (roomId) {
+       
+        // Autofill room ID
+        const roomInput = document.getElementById("room-input");
+        if (roomInput) roomInput.value = roomId;
+    
+        // OPTIONAL: auto join if function exists
+       
+      }
+    });
+    </script>
+    <script src="./assets/js/app.js"></script>
+   <!-- 🔥 Floating AI Assistant -->
+<div class="ai-fab" id="ai-fab">
+    <i class="fas fa-sparkles"></i>
+  </div>
+  
+  <div class="ai-panel" id="ai-panel">
+    <div class="ai-panel-header">
+      <span><i class="fas fa-robot"></i> AI Assistant</span>
+     
+    </div>
+  
+    <div class="ai-panel-body" id="ai-panel-body">
+      <p class="ai-hint">Ask anything about your document...</p>
+    </div>
+  
+    <div class="ai-panel-input">
+      <textarea id="ai-input" placeholder="Ask AI..."></textarea>
+      <button id="ai-send"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+ 
+
+
+  <div id="floating-toolbar" class="floating-toolbar">
+    <button data-command="bold"><i class="fas fa-bold"></i></button>
+    <button data-command="italic"><i class="fas fa-italic"></i></button>
+    <button data-command="underline"><i class="fas fa-underline"></i></button>
+  </div>
+  <div id="invite-modal" class="modal">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h3><i class="fas fa-user-plus"></i> Invite People</h3>
+        <button id="close-invite-modal" class="modal-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+  
+      <div class="modal-body">
+  
+        <!-- 🔗 Share link -->
+        <label>Share link</label>
+        <div class="invite-link-box">
+          <input id="invite-link" readonly />
+          <button id="copy-invite-link" class="btn-primary">Copy</button>
+        </div>
+  
+        <!-- 📧 Email invite -->
+        <label>Invite via email</label>
+        <div class="invite-email-box">
+          <input type="email" id="invite-email" placeholder="Enter email" />
+          
+          <select id="invite-role">
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+          </select>
+  
+          <button id="send-invite-btn" class="btn-primary">Send</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</body>
+</html>

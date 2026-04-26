@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — SyncSpace AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --danger: #ef4444;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --radius: 0.75rem;
+      --shadow: 0 20px 40px -8px rgb(0 0 0 / 0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 48px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.4s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .logo { font-size: 40px; color: var(--primary); margin-bottom: 12px; }
+    h1 { font-size: 24px; color: var(--text); margin-bottom: 6px; }
+    .subtitle { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    label { font-size: 14px; font-weight: 500; color: var(--text); }
+    input {
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.12);
+    }
+    .btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.12s;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .error-msg {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: var(--danger);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+    .hint { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .footer { text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-muted); }
+    .footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .footer a:hover { text-decoration: underline; }
+    .spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo"><i class="fas fa-edit"></i></div>
+    <h1>Create your account</h1>
+    <p class="subtitle">Start collaborating with AI today</p>
+
+    <div class="error-msg" id="error-msg"></div>
+
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="John Doe" maxlength="30" autocomplete="username">
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••" autocomplete="new-password">
+      <span class="hint">At least 6 characters</span>
+    </div>
+
+    <button class="btn" id="signup-btn">
+      Create Account
+    </button>
+
+    <div class="footer">
+      Already have an account? <a href="/auth/login.html">Sign in</a>
+    </div>
+  </div>
+
+  <script src="/assets/js/api.js"></script> 
+  <script>
+    console.log("API LOADED?", typeof register);
+  </script>
+  <script>
+  if (isAuthenticated()) location.replace('/dashboard/dashboard.html');
+
+    const usernameEl = document.getElementById('username');
+    const emailEl    = document.getElementById('email');
+    const passEl     = document.getElementById('password');
+    const btn        = document.getElementById('signup-btn');
+    const errEl      = document.getElementById('error-msg');
+
+    function showError(msg) { errEl.textContent = msg; errEl.classList.add('show'); }
+    function hideError()    { errEl.classList.remove('show'); }
+
+    async function handleSignup() {
+  console.log("🚀 Signup clicked");
+
+  hideError();
+
+  const username = usernameEl.value.trim();
+  const email    = emailEl.value.trim();
+  const password = passEl.value;
+
+  console.log({ username, email, password });
+
+  if (!username || !email || !password) {
+    console.log("❌ Validation failed");
+    return showError('Please fill in all fields.');
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = 'Creating...';
+
+  try {
+    console.log("📡 Calling register...");
+    const res = await register(username, email, password);
+    console.log("✅ Response:", res);
+
+    location.replace('/dashboard/dashboard.html?auto=true');
+  } catch (err) {
+    console.error("❌ ERROR:", err);
+    showError(err.message);
+    btn.disabled = false;
+    btn.textContent = 'Create Account';
+  }
+}
+
+    btn.addEventListener('click', handleSignup);
+    [usernameEl, emailEl, passEl].forEach(el =>
+      el.addEventListener('keypress', e => e.key === 'Enter' && handleSignup())
+    );
+  </script>
+</body>
+</html>

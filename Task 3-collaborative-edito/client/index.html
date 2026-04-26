@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SyncSpace AI - Intelligent Real-Time Collaborative Workspace. Collaborate, write, and think together with AI assistance.">
+  <title>SyncSpace AI — Intelligent Real-Time Collaborative Workspace</title>
+  <link rel="stylesheet" href="/assets/css/landing.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-cube"></i>
+        </div>
+        <span>SyncSpace AI</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#demo" class="nav-link">Demo</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      
+        <button class="btn btn-ghost" id="loginBtn">Login</button>
+        <button class="btn btn-primary" id="signupBtn">Get Started</button>
+      </div>
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-content">
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#how-it-works" class="mobile-link">How It Works</a>
+      <a href="#demo" class="mobile-link">Demo</a>
+      <div class="mobile-actions">
+        <button class="btn btn-ghost btn-full" id="mobileLoginBtn">Login</button>
+        <button class="btn btn-primary btn-full" id="mobileSignupBtn">Get Started</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="hero-container">
+      <div class="hero-badge">
+        <i class="fas fa-sparkles"></i>
+        <span>Powered by AI</span>
+      </div>
+      <h1 class="hero-title">
+        Collaborate. Write. Think.<br>
+        <span class="gradient-text">Together — with AI.</span>
+      </h1>
+      <p class="hero-subtitle">
+        The intelligent real-time collaborative workspace that transforms how teams 
+        create, edit, and brainstorm together. Experience the future of document collaboration.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" id="heroSignupBtn">
+          <span>Get Started</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <button class="btn btn-secondary btn-lg" id="heroLoginBtn">
+          <span>Login</span>
+        </button>
+        <button class="btn btn-glass btn-lg" id="heroDemoBtn">
+          <i class="fas fa-play"></i>
+          <span>Try Demo</span>
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">10K+</span>
+          <span class="stat-label">Active Users</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">50M+</span>
+          <span class="stat-label">Documents Created</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-value">99.9%</span>
+          <span class="stat-label">Uptime</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="editor-preview">
+        <div class="editor-header">
+          <div class="editor-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="editor-title">Untitled Document</span>
+          <div class="editor-users">
+            <div class="user-avatar" style="background: #2563eb;">A</div>
+            <div class="user-avatar" style="background: #7c3aed;">B</div>
+            <div class="user-avatar" style="background: #06b6d4;">C</div>
+          </div>
+        </div>
+        <div class="editor-content">
+          <div class="editor-line">
+            <span class="typing-cursor"></span>
+            <span class="editor-text">Welcome to SyncSpace AI...</span>
+          </div>
+          <div class="ai-suggestion">
+            <i class="fas fa-wand-magic-sparkles"></i>
+            <span>AI Suggestion: Continue with project overview</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge">Features</span>
+        <h2 class="section-title">Everything you need to collaborate</h2>
+        <p class="section-subtitle">
+          Powerful features designed to enhance your team's productivity and creativity.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="feature-title">Real-Time Collaboration</h3>
+          <p class="feature-description">
+            Work together with your team in real-time. See changes instantly, 
+            with live cursors and presence indicators.
+          </p>
+        </div>
+        <div class="feature-card featured">
+          <div class="feature-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3 class="feature-title">AI Writing Assistant</h3>
+          <p class="feature-description">
+            Get intelligent suggestions, auto-completions, and content 
+            improvements powered by advanced AI technology.
+          </p>
+          <span class="feature-badge">Most Popular</span>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock-rotate-left"></i>
+          </div>
+          <h3 class="feature-title">Version History</h3>
+          <p class="feature-description">
+            Never lose your work. Access complete version history and 
+            restore any previous state with one click.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3 class="feature-title">Analytics Insights</h3>
+          <p class="feature-description">
+            Understand your team's workflow with detailed analytics on 
+            document engagement and collaboration patterns.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-halved"></i>
+          </div>
+          <h3 class="feature-title">Role-Based Access</h3>
+          <p class="feature-description">
+            Control who can view, edit, or manage documents with 
+            granular permission settings and team roles.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge">How It Works</span>
+        <h2 class="section-title">Get started in minutes</h2>
+        <p class="section-subtitle">
+          Simple steps to transform your team's collaboration experience.
+        </p>
+      </div>
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3 class="step-title">Create Your Workspace</h3>
+            <p class="step-description">
+              Sign up and set up your team workspace in seconds. 
+              Invite team members and organize your projects.
+            </p>
+          </div>
+          <div class="step-visual">
+            <div class="step-icon-box">
+              <i class="fas fa-folder-plus"></i>
+            </div>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot"></div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3 class="step-title">Start Collaborating</h3>
+            <p class="step-description">
+              Create documents and start working together in real-time. 
+              See your team's cursors and changes instantly.
+            </p>
+          </div>
+          <div class="step-visual">
+            <div class="step-icon-box">
+              <i class="fas fa-pen-to-square"></i>
+            </div>
+          </div>
+        </div>
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot"></div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3 class="step-title">Enhance with AI</h3>
+            <p class="step-description">
+              Let AI boost your productivity with smart suggestions, 
+              auto-completions, and content improvements.
+            </p>
+          </div>
+          <div class="step-visual">
+            <div class="step-icon-box">
+              <i class="fas fa-wand-magic-sparkles"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section class="demo" id="demo">
+    <div class="section-container">
+      <div class="demo-card">
+        <div class="demo-content">
+          <span class="section-badge">Live Demo</span>
+          <h2 class="demo-title">Experience SyncSpace AI</h2>
+          <p class="demo-description">
+            Try our collaborative workspace right now. No sign-up required. 
+            Jump into a demo room and explore all features instantly.
+          </p>
+          <button class="btn btn-primary btn-lg demo-btn" id="launchDemoBtn">
+            <i class="fas fa-rocket"></i>
+            <span>Launch Demo Workspace</span>
+          </button>
+        </div>
+        <div class="demo-visual">
+          <div class="demo-window">
+            <div class="demo-window-header">
+              <div class="editor-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+            </div>
+            <div class="demo-window-content">
+              <div class="demo-cursor cursor-1">
+                <div class="cursor-pointer"></div>
+                <span class="cursor-label">Alex</span>
+              </div>
+              <div class="demo-cursor cursor-2">
+                <div class="cursor-pointer"></div>
+                <span class="cursor-label">Sam</span>
+              </div>
+              <div class="demo-lines">
+                <div class="demo-line"></div>
+                <div class="demo-line short"></div>
+                <div class="demo-line medium"></div>
+                <div class="demo-line"></div>
+                <div class="demo-line short"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-cube"></i>
+          </div>
+          <span>SyncSpace AI</span>
+        </a>
+        <p class="footer-tagline">
+          The future of collaborative work is here.
+        </p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4 class="footer-heading">Product</h4>
+          <a href="#features" class="footer-link">Features</a>
+          <a href="#how-it-works" class="footer-link">How It Works</a>
+          <a href="#demo" class="footer-link">Demo</a>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-heading">Company</h4>
+          <a href="#" class="footer-link">About</a>
+          <a href="#" class="footer-link">Blog</a>
+          <a href="#" class="footer-link">Careers</a>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-heading">Legal</h4>
+          <a href="#" class="footer-link">Privacy</a>
+          <a href="#" class="footer-link">Terms</a>
+          <a href="#" class="footer-link">Security</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 SyncSpace AI. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+    "name": "real-time-collaborative-editor",
+    "version": "1.0.0",
+    "description": "Scalable multi-user real-time collaborative editing system using WebSocket protocol",
+    "main": "server/server.js",
+    "scripts": {
+      "start": "cd server && npm start",
+      "dev": "cd server && npm run dev",
+      "install-all": "cd server && npm install",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+      "websocket",
+      "collaborative-editing",
+      "real-time",
+      "socket.io",
+      "nodejs",
+      "btech-project"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/real-time-collaborative-editor"
+    }
+  }
