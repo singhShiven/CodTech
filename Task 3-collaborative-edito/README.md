@@ -259,9 +259,8 @@ MIT License - free for academic and commercial use
 
 **Your Name**  
 BTech Final Year Project  
-[Your University Name]
+Manipal University Jaipur
 
 ## 📧 Contact
 
-- Email: your.email@example.com
-- GitHub: github.com/yourusername
+- Email: shivendrasingh0020@gmail.com
